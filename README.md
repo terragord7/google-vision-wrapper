@@ -32,6 +32,7 @@ I started for a small project of aesthetics medicine I'm working on and I though
 #### _Classes and Methods_
 
 ***
+
 ```python
 class GVisionAPI():  
   def __init__(self,keyfile=None):
@@ -48,6 +49,29 @@ from gvision import GVisionAPI
 
 authfile = 'path_to_authfile'
 gvision = GVisionAPI(authfile)
+```
+
+***
+
+```python
+def perform_request(self,img=None,request_type=None):
+```
+#### Description:
+Given and imput image in either numpy array or bytes format checks type and perform conversion nparray->bytes (if needed). Provides the bytes content to the Google client and performs an API request based on the "request_type" parameter. Response can be accessed using the ```self.response``` attribute.
+
+#### Parameters:
+**img** : input imange of type numpy.ndarray or bytes
+**request_type** : a string representing the type of request to perform. Possible values: ['face detection','landmark detection','logo detection','object detection','label detection','image properties']
+
+#### Usage:
+```python
+import cv2
+
+# replace 'path_to_image' with what you want
+img   = cv2.imread('path_to_image')
+
+gvision.perform_request('face detection')
+print(gvision.response)
 ```
 
 ***
