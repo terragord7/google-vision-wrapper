@@ -180,7 +180,7 @@ print(gvision.response)
     def texts(self):
         '''
         Loops on the detected texts. For each,
-        appends a list with name, confidence and
+        appends a list with description, language and
         (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
