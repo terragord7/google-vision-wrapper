@@ -35,7 +35,7 @@ I started for a small project of aesthetics medicine I'm working on and I though
 
 ***
 
-### Class Initialization
+### 1. Class Initialization
 
 ```python
 class GVisionAPI():  
@@ -65,7 +65,7 @@ gvision = GVisionAPI(authfile)
 
 ***
 
-### Perform a Request
+### 2. Perform a Request
 
 ```python
 def perform_request(self,img=None,request_type=None):
@@ -104,7 +104,7 @@ print(gvision.response)
 
 ***
 
-### Obtain Data as list
+### 3. Obtain Data as list
 
 ```python
     def face_landmarks(self):
@@ -311,3 +311,46 @@ ch_headers, ch_data = gvision.crop_hints()
 ```
 
 ***
+
+### 4. Obtain Data as a Pandas DataFrame
+
+```python
+def to_df(self,option=None,name='image'):
+    '''
+    Parameters:
+    - option: a string in ['face landmarks','face','head','angles',
+                          'objects','landmarks','logos','labels',
+                          'colors', 'crop hints','texts','pages',
+                          'blocks','paragraphs','words','symbols']
+      precifing the type of information to dump in the DataFrame
+    - name: (optional) the name of the image used in the request. 
+      default is 'image'.
+
+    Returns:
+    a DataFrame with information for the specific option.
+    '''
+```
+#### _Description_:
+Dump the information specific to the  ```option``` parameter into a pandas DataFrame.
+
+**N.B.**: Each option retrieves information via the output lists of the functions defined in Section 3. The same rule regarding the type of request and the information available is applicable to this method. 
+
+#### _Parameters_:
+**option** : a string representing the type of information to retrieve. Possible values: ['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors', 'crop hints','texts','pages','blocks','paragraphs','words','symbols']. All the possible options can printed with the method ```df_options()``` and retrieved as a list from the ```df_types``` attribute.
+
+**name** : a value representing the name or the id of the processed image that will be appended to each row of the returned DataFrame.
+
+#### _Usage_:
+```python
+gvision.perform_request('object detection')
+df = gvision.to_df('objects')
+
+#print the possible options via method
+gvision.df_options()
+# or via attribute
+print(gvision.df_types)
+```
+
+***
+
+
