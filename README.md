@@ -29,9 +29,10 @@ Even if the guide is exhaustive and the API is straightforward to use, I found t
 
 I started for a small project of aesthetics medicine I'm working on and I though that maybe someone else could find it useful. I am therefore extending my original tiny class for face landmark recognition, with all the features provided by Google Vision API, with the possibility of retrieving the desired information in 3-lines code, in array format or as a Pandas DataFrame.
 
+### _Before you start: Setup your GCP_
+Before starting, it is mandatory to correctly setup a Google Cloud Project, authorise the Google Vision API and generate a .json API key file. Be sure to have fulfilled all the steps in the [Before you Begin Guide](https://cloud.google.com/vision/docs/before-you-begin) before moving on.
+
 ### _Classes and Methods_
-
-
 
 ***
 
@@ -85,7 +86,7 @@ def perform_request(self,img=None,request_type=None):
     '''
 ```
 #### _Description_:
-Given and imput image in either numpy array or bytes format checks type and perform conversion nparray->bytes (if needed). Provides the bytes content to the Google client and performs an API request based on the "request_type" parameter. Response can be accessed using the ```self.response``` attribute.
+Given and imput image in either numpy array or bytes format checks type and perform conversion nparray->bytes (if needed). Provides the bytes content to the Google client and performs an API request based on the "request_type" parameter. Response can be accessed using the ```self.response``` attribute. All the possible options can printed with the method ```request_options()``` and retrieved as a list from the ```request_types``` attribute.
 
 #### _Parameters_:
 **img** : input imange of type numpy.ndarray or bytes
@@ -98,6 +99,12 @@ import cv2
 # replace 'path_to_image' with what you want
 img   = cv2.imread('path_to_image')
 
+#print the possible options via method
+gvision.request_options()
+# or via attribute
+print(gvision.request_types)
+
+#perform request
 gvision.perform_request('face detection')
 print(gvision.response)
 ```
@@ -342,13 +349,14 @@ Dump the information specific to the  ```option``` parameter into a pandas DataF
 
 #### _Usage_:
 ```python
-gvision.perform_request('object detection')
-df = gvision.to_df('objects')
-
 #print the possible options via method
 gvision.df_options()
 # or via attribute
 print(gvision.df_types)
+
+# dump to DataFrame
+gvision.perform_request('object detection')
+df = gvision.to_df('objects')
 ```
 
 ***
