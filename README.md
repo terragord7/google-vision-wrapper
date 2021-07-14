@@ -1,5 +1,5 @@
 # google-vision-wrapper
-A Tiny Python Wrapper for Google Vision API. 🐍
+A Tiny Python Wrapper 🐍 for Google Vision API. 👁
 
 ### _Introduction_
 
@@ -78,7 +78,9 @@ def perform_request(self,img=None,request_type=None):
 
     Parameters:
     - img : input imange of type numpy.ndarray or bytes
-    - request_type : a string in ['face detection','landmark detection','logo detection']
+    - request_type : a string in ['face detection','landmark detection','logo detection',
+                                  'object detection','label detection','image properties',
+                                  'text detection']
       representing the type of request to perform
     '''
 ```
@@ -185,6 +187,53 @@ print(gvision.response)
         Appends also a list with the corresponding headers.
         Returns the two lists created.
         '''
+        
+    def pages(self):
+        '''
+        Loops on the detected pages. For each,
+        appends a list with language, confidence, 
+        height and width.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        ''' 
+        
+    def blocks(self):
+        '''
+        Loops on the blocks in the detected pages. For each,
+        appends a list with description, language, confidence, block type 
+        and (x,y) 2-tuples with the bounding box coordinates.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+    
+    def paragraphs(self):
+        '''
+        Loops on the paragraphs in the blocks in the detected pages. For each,
+        appends a list with description, language, confidence
+        and (x,y) 2-tuples with the bounding box coordinates.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+    
+    def words(self):
+        '''
+        Loops on the words in the paragraphs 
+        in the blocks in the detected pages. For each,
+        appends a list with language
+        and (x,y) 2-tuples with the bounding box coordinates.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+    
+    def symbols(self):
+        '''
+        Loops on the symbols in the words, in the paragraphs,
+        in the blocks, in the detected pages. For each,
+        appends a list with text, language
+        and (x,y) 2-tuples with the bounding box coordinates.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
      
     def landmarks(self):
         '''
@@ -247,7 +296,13 @@ gvision.perform_request('logo detection')
 headers, data = gvision.logos()
 
 gvision.perform_request('text detection')
-headers, data = gvision.texts()
+headers,    data    = gvision.texts()
+p_headers,  p_data  = gvision.pages()
+b_headers,  b_data  = gvision.blocks()
+pr_headers, pr_data = gvision.paragraphs()
+w_headers,  w_data  = gvision.words()
+s_headers,  s_data  = gvision.symbols()
+
 
 gvision.perform_request('image properties')
 headers,    data    = gvision.colors()
