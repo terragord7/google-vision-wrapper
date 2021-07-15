@@ -1,16 +1,6 @@
 ### Introduction
 In this quick tutorial we are going to show how to use google-vision-wrapper to perform face detection on images. Please refer to the [Official Github Page](https://github.com/gcgrossi/google-vision-wrapper) for more information.
 
-For the purpose, we are going to use this image: 
-
-***
-
-<img src="images/frodo.png" width="30%">
-
-***
-
-of Frodo, just a second before the Ring of Power will subtly slip on his finger.
-
 ### Before you begin
 Before starting, it is mandatory to correctly setup a Google Cloud Project, authorise the Google Vision API and generate a .json API key file. Be sure to have fulfilled all the steps in the [Before you Begin Guide](https://cloud.google.com/vision/docs/before-you-begin) before moving on.
 
@@ -49,13 +39,6 @@ we are going to use this image:
 #transform to RGB -> an OpenCV speciality
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 ```
-
-
-
-
-    <matplotlib.image.AxesImage at 0x1754626bb20>
-
-
 
 
 ![png](output_7_1.png)
@@ -159,283 +142,8 @@ print(gvision.response)
           z: 0.0001783371
         }
       }
-      landmarks {
-        type: RIGHT_EYE
-        position {
-          x: 881.94556
-          y: 496.9984
-          z: -9.51236
-        }
-      }
-      landmarks {
-        type: LEFT_OF_LEFT_EYEBROW
-        position {
-          x: 657.70886
-          y: 454.04877
-          z: 16.90604
-        }
-      }
-      landmarks {
-        type: RIGHT_OF_LEFT_EYEBROW
-        position {
-          x: 751.98846
-          y: 450.1511
-          z: -33.992767
-        }
-      }
-      landmarks {
-        type: LEFT_OF_RIGHT_EYEBROW
-        position {
-          x: 838.1833
-          y: 448.74084
-          z: -38.624386
-        }
-      }
-      landmarks {
-        type: RIGHT_OF_RIGHT_EYEBROW
-        position {
-          x: 935.72235
-          y: 456.42496
-          z: 1.0412332
-        }
-      }
-      landmarks {
-        type: MIDPOINT_BETWEEN_EYES
-        position {
-          x: 793.90564
-          y: 484.1728
-          z: -37.981186
-        }
-      }
-      landmarks {
-        type: NOSE_TIP
-        position {
-          x: 788.75854
-          y: 589.0017
-          z: -83.67613
-        }
-      }
-      landmarks {
-        type: UPPER_LIP
-        position {
-          x: 794.0109
-          y: 651.6462
-          z: -45.601925
-        }
-      }
-      landmarks {
-        type: LOWER_LIP
-        position {
-          x: 793.0732
-          y: 703.92975
-          z: -32.931118
-        }
-      }
-      landmarks {
-        type: MOUTH_LEFT
-        position {
-          x: 731.4522
-          y: 667.5446
-          z: 2.1176696
-        }
-      }
-      landmarks {
-        type: MOUTH_RIGHT
-        position {
-          x: 858.6494
-          y: 672.274
-          z: -5.947419
-        }
-      }
-      landmarks {
-        type: MOUTH_CENTER
-        position {
-          x: 795.5062
-          y: 674.6855
-          z: -33.040573
-        }
-      }
-      landmarks {
-        type: NOSE_BOTTOM_RIGHT
-        position {
-          x: 843.2964
-          y: 606.981
-          z: -26.604473
-        }
-      }
-      landmarks {
-        type: NOSE_BOTTOM_LEFT
-        position {
-          x: 756.49097
-          y: 597.9932
-          z: -20.07655
-        }
-      }
-      landmarks {
-        type: NOSE_BOTTOM_CENTER
-        position {
-          x: 795.6024
-          y: 614.9024
-          z: -46.91411
-        }
-      }
-      landmarks {
-        type: LEFT_EYE_TOP_BOUNDARY
-        position {
-          x: 710.7346
-          y: 476.75995
-          z: -9.259534
-        }
-      }
-      landmarks {
-        type: LEFT_EYE_RIGHT_CORNER
-        position {
-          x: 746.5731
-          y: 498.6928
-          z: -1.9768437
-        }
-      }
-      landmarks {
-        type: LEFT_EYE_BOTTOM_BOUNDARY
-        position {
-          x: 710.41016
-          y: 509.3332
-          z: -1.4441359
-        }
-      }
-      landmarks {
-        type: LEFT_EYE_LEFT_CORNER
-        position {
-          x: 675.2196
-          y: 495.91968
-          z: 16.691378
-        }
-      }
-      landmarks {
-        type: RIGHT_EYE_TOP_BOUNDARY
-        position {
-          x: 885.28815
-          y: 480.55664
-          z: -19.120672
-        }
-      }
-      landmarks {
-        type: RIGHT_EYE_RIGHT_CORNER
-        position {
-          x: 914.18146
-          y: 500.20126
-          z: 3.3551452
-        }
-      }
-      landmarks {
-        type: RIGHT_EYE_BOTTOM_BOUNDARY
-        position {
-          x: 884.17615
-          y: 510.56717
-          z: -11.138449
-        }
-      }
-      landmarks {
-        type: RIGHT_EYE_LEFT_CORNER
-        position {
-          x: 852.7848
-          y: 500.15027
-          z: -7.694488
-        }
-      }
-      landmarks {
-        type: LEFT_EYEBROW_UPPER_MIDPOINT
-        position {
-          x: 705.09644
-          y: 437.93378
-          z: -19.020367
-        }
-      }
-      landmarks {
-        type: RIGHT_EYEBROW_UPPER_MIDPOINT
-        position {
-          x: 887.2174
-          y: 437.77283
-          z: -29.28423
-        }
-      }
-      landmarks {
-        type: LEFT_EAR_TRAGION
-        position {
-          x: 621.1412
-          y: 527.2895
-          z: 211.4948
-        }
-      }
-      landmarks {
-        type: RIGHT_EAR_TRAGION
-        position {
-          x: 987.52606
-          y: 544.8672
-          z: 189.75496
-        }
-      }
-      landmarks {
-        type: FOREHEAD_GLABELLA
-        position {
-          x: 792.5226
-          y: 445.40393
-          z: -41.774616
-        }
-      }
-      landmarks {
-        type: CHIN_GNATHION
-        position {
-          x: 801.09766
-          y: 774.55664
-          z: -7.8134923
-        }
-      }
-      landmarks {
-        type: CHIN_LEFT_GONION
-        position {
-          x: 663.2837
-          y: 679.81067
-          z: 144.78
-        }
-      }
-      landmarks {
-        type: CHIN_RIGHT_GONION
-        position {
-          x: 947.96484
-          y: 700.3831
-          z: 126.59434
-        }
-      }
-      landmarks {
-        type: 35
-        position {
-          x: 680.70074
-          y: 605.73566
-          z: 19.268713
-        }
-      }
-      landmarks {
-        type: 36
-        position {
-          x: 910.02954
-          y: 610.57983
-          z: 6.180194
-        }
-      }
-      roll_angle: 0.23438607
-      pan_angle: -3.1857908
-      tilt_angle: -2.1558063
-      detection_confidence: 0.8786704
-      landmarking_confidence: 0.48624483
-      joy_likelihood: VERY_UNLIKELY
-      sorrow_likelihood: VERY_UNLIKELY
-      anger_likelihood: VERY_UNLIKELY
-      surprise_likelihood: VERY_UNLIKELY
-      under_exposed_likelihood: VERY_UNLIKELY
-      blurred_likelihood: VERY_UNLIKELY
-      headwear_likelihood: VERY_UNLIKELY
-    }
+      
+      ...........
     
     
 
@@ -464,8 +172,10 @@ print(land_pts)
 
     ['face1', 'face2', 'face3', 'face4']
     [[(573, 314), (1031, 314), (1031, 764), (573, 764)]]
+    
     ['head1', 'head2', 'head3', 'head4']
     [[(526, 175), (1078, 175), (1078, 818), (526, 818)]]
+    
     ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '31', '32', '33', '34', '35', '36']
     [[(711.7129516601562, 494.0753173828125), (881.945556640625, 496.9984130859375), (657.7088623046875, 454.04876708984375), (751.9884643554688, 450.1510925292969), (838.1832885742188, 448.7408447265625), (935.7223510742188, 456.4249572753906), (793.9056396484375, 484.17279052734375), (788.758544921875, 589.001708984375), (794.0109252929688, 651.6461791992188), (793.0731811523438, 703.9297485351562), (731.4522094726562, 667.5446166992188), (858.6494140625, 672.2739868164062), (795.5062255859375, 674.6854858398438), (843.29638671875, 606.9810180664062), (756.490966796875, 597.9932250976562), (795.6024169921875, 614.9024047851562), (710.734619140625, 476.75994873046875), (746.5731201171875, 498.69281005859375), (710.41015625, 509.33319091796875), (675.2196044921875, 495.919677734375), (885.2881469726562, 480.556640625), (914.1814575195312, 500.2012634277344), (884.1761474609375, 510.5671691894531), (852.7847900390625, 500.1502685546875), (705.096435546875, 437.93377685546875), (887.2174072265625, 437.7728271484375), (621.1411743164062, 527.2894897460938), (987.5260620117188, 544.8671875), (792.5225830078125, 445.4039306640625), (801.09765625, 774.556640625), (663.28369140625, 679.8106689453125), (947.96484375, 700.3831176757812), (680.7007446289062, 605.7356567382812), (910.029541015625, 610.579833984375)]]
     
@@ -524,19 +234,6 @@ df_face
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -574,19 +271,6 @@ df_head
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -624,19 +308,6 @@ df_land
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -726,14 +397,6 @@ plt.imshow(boxed)
 output = cv2.cvtColor(boxed, cv2.COLOR_RGB2BGR)
 cv2.imwrite(os.path.join(os.getcwd(),'assets','output_frodo.jpg'), output)
 ```
-
-
-
-
-    True
-
-
-
 
 ![png](output_26_1.png)
 
