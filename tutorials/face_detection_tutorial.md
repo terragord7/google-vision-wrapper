@@ -28,17 +28,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-### Initialize the class
-```authfile``` is the path to your API key file in .json format.
-
-
-```python
-# path to auth key file
-authfile = os.path.join(os.getcwd(),'gvision_auth.json')
-gvision = GVisionAPI(authfile)
-```
-
-### Read the input image and perform a request
+### Read The input image
 You can read the input image in the way you prefer, the class accepts 2 formats:
 1. numpy.ndarray
 2. bytes
@@ -51,6 +41,39 @@ The Google Vision API accepts images in bytes format. If you chose to go on with
 img = cv2.imread(os.path.join(os.getcwd(),'images','frodo.png'))
 ```
 
+we are going to use this image: 
+
+
+```python
+#show the image
+#transform to RGB -> an OpenCV speciality
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x1754626bb20>
+
+
+
+
+![png](output_7_1.png)
+
+
+of Frodo, just a second before the Ring of Power will subtly slip on his finger.
+
+### Initialize the class
+```authfile``` is the path to your API key file in .json format.
+
+
+```python
+# path to auth key file
+authfile = os.path.join(os.getcwd(),'gvision_auth.json')
+gvision = GVisionAPI(authfile)
+```
+
+### Perform a request
 The method we are goin to use is: ```.perform_request(img,option)```. It accepts 2 parameters:
 1. the image already loaded
 2. an option that specifies what kind of request to make
@@ -90,6 +113,331 @@ gvision.perform_request(img,'face detection')
 # print the response
 print(gvision.response)
 ```
+
+    face_annotations {
+      bounding_poly {
+        vertices {
+          x: 526
+          y: 175
+        }
+        vertices {
+          x: 1078
+          y: 175
+        }
+        vertices {
+          x: 1078
+          y: 818
+        }
+        vertices {
+          x: 526
+          y: 818
+        }
+      }
+      fd_bounding_poly {
+        vertices {
+          x: 573
+          y: 314
+        }
+        vertices {
+          x: 1031
+          y: 314
+        }
+        vertices {
+          x: 1031
+          y: 764
+        }
+        vertices {
+          x: 573
+          y: 764
+        }
+      }
+      landmarks {
+        type: LEFT_EYE
+        position {
+          x: 711.71295
+          y: 494.07532
+          z: 0.0001783371
+        }
+      }
+      landmarks {
+        type: RIGHT_EYE
+        position {
+          x: 881.94556
+          y: 496.9984
+          z: -9.51236
+        }
+      }
+      landmarks {
+        type: LEFT_OF_LEFT_EYEBROW
+        position {
+          x: 657.70886
+          y: 454.04877
+          z: 16.90604
+        }
+      }
+      landmarks {
+        type: RIGHT_OF_LEFT_EYEBROW
+        position {
+          x: 751.98846
+          y: 450.1511
+          z: -33.992767
+        }
+      }
+      landmarks {
+        type: LEFT_OF_RIGHT_EYEBROW
+        position {
+          x: 838.1833
+          y: 448.74084
+          z: -38.624386
+        }
+      }
+      landmarks {
+        type: RIGHT_OF_RIGHT_EYEBROW
+        position {
+          x: 935.72235
+          y: 456.42496
+          z: 1.0412332
+        }
+      }
+      landmarks {
+        type: MIDPOINT_BETWEEN_EYES
+        position {
+          x: 793.90564
+          y: 484.1728
+          z: -37.981186
+        }
+      }
+      landmarks {
+        type: NOSE_TIP
+        position {
+          x: 788.75854
+          y: 589.0017
+          z: -83.67613
+        }
+      }
+      landmarks {
+        type: UPPER_LIP
+        position {
+          x: 794.0109
+          y: 651.6462
+          z: -45.601925
+        }
+      }
+      landmarks {
+        type: LOWER_LIP
+        position {
+          x: 793.0732
+          y: 703.92975
+          z: -32.931118
+        }
+      }
+      landmarks {
+        type: MOUTH_LEFT
+        position {
+          x: 731.4522
+          y: 667.5446
+          z: 2.1176696
+        }
+      }
+      landmarks {
+        type: MOUTH_RIGHT
+        position {
+          x: 858.6494
+          y: 672.274
+          z: -5.947419
+        }
+      }
+      landmarks {
+        type: MOUTH_CENTER
+        position {
+          x: 795.5062
+          y: 674.6855
+          z: -33.040573
+        }
+      }
+      landmarks {
+        type: NOSE_BOTTOM_RIGHT
+        position {
+          x: 843.2964
+          y: 606.981
+          z: -26.604473
+        }
+      }
+      landmarks {
+        type: NOSE_BOTTOM_LEFT
+        position {
+          x: 756.49097
+          y: 597.9932
+          z: -20.07655
+        }
+      }
+      landmarks {
+        type: NOSE_BOTTOM_CENTER
+        position {
+          x: 795.6024
+          y: 614.9024
+          z: -46.91411
+        }
+      }
+      landmarks {
+        type: LEFT_EYE_TOP_BOUNDARY
+        position {
+          x: 710.7346
+          y: 476.75995
+          z: -9.259534
+        }
+      }
+      landmarks {
+        type: LEFT_EYE_RIGHT_CORNER
+        position {
+          x: 746.5731
+          y: 498.6928
+          z: -1.9768437
+        }
+      }
+      landmarks {
+        type: LEFT_EYE_BOTTOM_BOUNDARY
+        position {
+          x: 710.41016
+          y: 509.3332
+          z: -1.4441359
+        }
+      }
+      landmarks {
+        type: LEFT_EYE_LEFT_CORNER
+        position {
+          x: 675.2196
+          y: 495.91968
+          z: 16.691378
+        }
+      }
+      landmarks {
+        type: RIGHT_EYE_TOP_BOUNDARY
+        position {
+          x: 885.28815
+          y: 480.55664
+          z: -19.120672
+        }
+      }
+      landmarks {
+        type: RIGHT_EYE_RIGHT_CORNER
+        position {
+          x: 914.18146
+          y: 500.20126
+          z: 3.3551452
+        }
+      }
+      landmarks {
+        type: RIGHT_EYE_BOTTOM_BOUNDARY
+        position {
+          x: 884.17615
+          y: 510.56717
+          z: -11.138449
+        }
+      }
+      landmarks {
+        type: RIGHT_EYE_LEFT_CORNER
+        position {
+          x: 852.7848
+          y: 500.15027
+          z: -7.694488
+        }
+      }
+      landmarks {
+        type: LEFT_EYEBROW_UPPER_MIDPOINT
+        position {
+          x: 705.09644
+          y: 437.93378
+          z: -19.020367
+        }
+      }
+      landmarks {
+        type: RIGHT_EYEBROW_UPPER_MIDPOINT
+        position {
+          x: 887.2174
+          y: 437.77283
+          z: -29.28423
+        }
+      }
+      landmarks {
+        type: LEFT_EAR_TRAGION
+        position {
+          x: 621.1412
+          y: 527.2895
+          z: 211.4948
+        }
+      }
+      landmarks {
+        type: RIGHT_EAR_TRAGION
+        position {
+          x: 987.52606
+          y: 544.8672
+          z: 189.75496
+        }
+      }
+      landmarks {
+        type: FOREHEAD_GLABELLA
+        position {
+          x: 792.5226
+          y: 445.40393
+          z: -41.774616
+        }
+      }
+      landmarks {
+        type: CHIN_GNATHION
+        position {
+          x: 801.09766
+          y: 774.55664
+          z: -7.8134923
+        }
+      }
+      landmarks {
+        type: CHIN_LEFT_GONION
+        position {
+          x: 663.2837
+          y: 679.81067
+          z: 144.78
+        }
+      }
+      landmarks {
+        type: CHIN_RIGHT_GONION
+        position {
+          x: 947.96484
+          y: 700.3831
+          z: 126.59434
+        }
+      }
+      landmarks {
+        type: 35
+        position {
+          x: 680.70074
+          y: 605.73566
+          z: 19.268713
+        }
+      }
+      landmarks {
+        type: 36
+        position {
+          x: 910.02954
+          y: 610.57983
+          z: 6.180194
+        }
+      }
+      roll_angle: 0.23438607
+      pan_angle: -3.1857908
+      tilt_angle: -2.1558063
+      detection_confidence: 0.8786704
+      landmarking_confidence: 0.48624483
+      joy_likelihood: VERY_UNLIKELY
+      sorrow_likelihood: VERY_UNLIKELY
+      anger_likelihood: VERY_UNLIKELY
+      surprise_likelihood: VERY_UNLIKELY
+      under_exposed_likelihood: VERY_UNLIKELY
+      blurred_likelihood: VERY_UNLIKELY
+      headwear_likelihood: VERY_UNLIKELY
+    }
+    
+    
 
 And it is quite verbose. 
 
@@ -348,7 +696,46 @@ df_land
 
 
 
+### Draw the results
+You can now draw the results in the way you prefer. I will do it using OpenCV.
+
 
 ```python
+#copy the original image
+#transform to RGB -> an OpenCV speciality
+boxed = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2RGB)
 
+# draw rectangles on the detected face
+for pt in face_pts:
+    tl,tr,br,bl = pt[0],pt[1],pt[2],pt[3]
+    cv2.rectangle(boxed, (int(tl[0]),int(tl[1])), (int(br[0]),int(br[1])), (0, 255, 0), 1)
+
+# draw rectangles on the detected head
+for pt in head_pts:
+    tl,tr,br,bl = pt[0],pt[1],pt[2],pt[3]
+    cv2.rectangle(boxed, (int(tl[0]),int(tl[1])), (int(br[0]),int(br[1])), (0, 255, 0), 1)
+
+# draw face landmarks
+for face in land_pts:
+    for pt in face: cv2.circle(boxed, (int(pt[0]), int(pt[1])), 3, (0, 255, 0), -1)
+
+#show the image
+plt.imshow(boxed)
+
+# save to disk
+output = cv2.cvtColor(boxed, cv2.COLOR_RGB2BGR)
+cv2.imwrite(os.path.join(os.getcwd(),'assets','output_frodo.jpg'), output)
 ```
+
+
+
+
+    True
+
+
+
+
+![png](output_26_1.png)
+
+
+And there it is! Our (anti)hero Frodo has been catched by the eye of Sauron ... or is better to say by the eye of Google?  
