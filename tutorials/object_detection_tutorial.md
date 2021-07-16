@@ -1,6 +1,6 @@
 ***
 
-<img src="assets/object_detection_cover.png" width="100%">
+<img src="../assets/object_detection_cover.png" width="100%">
     
 ***
 
@@ -47,13 +47,6 @@ we are going to use this image:
 #transform to RGB -> an OpenCV speciality
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 ```
-
-
-
-
-    <matplotlib.image.AxesImage at 0x245afc44f40>
-
-
 
 
 ![png](output_8_1.png)
@@ -181,145 +174,9 @@ print(gvision.response)
         }
       }
     }
-    localized_object_annotations {
-      mid: "/m/04brg2"
-      name: "Tableware"
-      score: 0.60266167
-      bounding_poly {
-        normalized_vertices {
-          x: 0.44296086
-          y: 0.8646457
-        }
-        normalized_vertices {
-          x: 0.55630624
-          y: 0.8646457
-        }
-        normalized_vertices {
-          x: 0.55630624
-          y: 0.99460286
-        }
-        normalized_vertices {
-          x: 0.44296086
-          y: 0.99460286
-        }
-      }
-    }
-    localized_object_annotations {
-      mid: "/m/04brg2"
-      name: "Tableware"
-      score: 0.55564094
-      bounding_poly {
-        normalized_vertices {
-          x: 0.36916682
-          y: 0.70901513
-        }
-        normalized_vertices {
-          x: 0.4926493
-          y: 0.70901513
-        }
-        normalized_vertices {
-          x: 0.4926493
-          y: 0.8592438
-        }
-        normalized_vertices {
-          x: 0.36916682
-          y: 0.8592438
-        }
-      }
-    }
-    localized_object_annotations {
-      mid: "/m/02wbm"
-      name: "Food"
-      score: 0.5388655
-      bounding_poly {
-        normalized_vertices {
-          x: 0.6734839
-          y: 0.75721484
-        }
-        normalized_vertices {
-          x: 0.8086744
-          y: 0.75721484
-        }
-        normalized_vertices {
-          x: 0.8086744
-          y: 0.8834625
-        }
-        normalized_vertices {
-          x: 0.6734839
-          y: 0.8834625
-        }
-      }
-    }
-    localized_object_annotations {
-      mid: "/m/09j2d"
-      name: "Clothing"
-      score: 0.53602844
-      bounding_poly {
-        normalized_vertices {
-          x: 0.005104833
-          y: 0.11665205
-        }
-        normalized_vertices {
-          x: 0.5406234
-          y: 0.11665205
-        }
-        normalized_vertices {
-          x: 0.5406234
-          y: 0.9903961
-        }
-        normalized_vertices {
-          x: 0.005104833
-          y: 0.9903961
-        }
-      }
-    }
-    localized_object_annotations {
-      mid: "/m/02wbm"
-      name: "Food"
-      score: 0.5214672
-      bounding_poly {
-        normalized_vertices {
-          x: 0.37244225
-          y: 0.70662093
-        }
-        normalized_vertices {
-          x: 0.4863522
-          y: 0.70662093
-        }
-        normalized_vertices {
-          x: 0.4863522
-          y: 0.85269207
-        }
-        normalized_vertices {
-          x: 0.37244225
-          y: 0.85269207
-        }
-      }
-    }
-    localized_object_annotations {
-      mid: "/m/02wbm"
-      name: "Food"
-      score: 0.5160248
-      bounding_poly {
-        normalized_vertices {
-          x: 0.44171062
-          y: 0.8673384
-        }
-        normalized_vertices {
-          x: 0.55844903
-          y: 0.8673384
-        }
-        normalized_vertices {
-          x: 0.55844903
-          y: 0.9951336
-        }
-        normalized_vertices {
-          x: 0.44171062
-          y: 0.9951336
-        }
-      }
-    }
-    
+
+
+    ..........
     
 
 And it is quite verbose. 
@@ -393,19 +250,6 @@ df_face
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -547,18 +391,9 @@ cv2.imwrite(os.path.join(os.getcwd(),'assets','output_bagend.jpg'), output)
 ```
 
 
-
-
-    True
-
-
-
-
 ![png](output_25_1.png)
 
 
 As you can see the API has correctly spotted 2 People, 1 Clothing (Gandalf's robe), some Food and Tableware associated on a very crowded image. Unfortunately, the Vision API does not have the power to spot the ring inside Bilbo's pocket, this is an exclusive power of Sauron's eye! 
 
 Let's wait and see, maybe in the future Google will build an API worthy of Mordor and surpass even the power of th Master of the One Ring!
-
-<image src="assets/face_detection_cover.png" width="50%">
