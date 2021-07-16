@@ -1,4 +1,4 @@
-<image src="assets/logo.png" width="100%">
+<img src="assets/logo.png" width="100%">
 
 # google-vision-wrapper
 A Tiny Python Wrapper 🐍 for Google Vision API. 👁
