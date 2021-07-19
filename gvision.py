@@ -20,10 +20,48 @@ class GVisionAPI():
         
         self.keyfile = keyfile
         self.request_category = None
-        self.request_types = ['face detection','landmark detection','logo detection','object detection','label detection','image properties','text detection']
-        self.df_types      = ['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors','crop hints','texts','pages','blocks','paragraphs','words','symbols']
-        
+        self.client = None
+
+        # setup Vision API environment
         self.set_environ()
+        if self.client == None: 
+            raise Exception("Client was not setup correctly.")
+        
+        # define a dictionary with all possible resquests
+        self.requests_dict = {
+            'face detection' :    self.client.face_detection,
+            'landmark detection': self.client.landmark_detection,
+            'logo detection':     self.client.logo_detection,
+            'object detection':   self.client.object_localization,
+            'label detection':    self.client.label_detection,
+            'image properties':   self.client.image_properties,
+            'text detection':     self.client.text_detection
+        }
+
+        # define a dictionary with the methods available
+        self.methods_dict = {
+            'face landmarks': self.face_landmarks,
+            'face': self.face,
+            'head': self.head,
+            'angles': self.angles,
+            'objects': self.objects,
+            'landmarks':self.landmarks,
+            'logo': self.logos,
+            'labels':self.labels,
+            'colors':self.colors,
+            'crop hints':self.crop_hints,
+            'text':self.texts,
+            'pages':self.pages,
+            'blocks':self.blocks,
+            'paragraphs':self.paragraphs,
+            'words':self.words,
+            'symbols':self.symbols
+        }
+        
+        # the options are the keys of the dictionaries
+        self.request_types = self.requests_dict.keys()
+        self.df_types      = self.methods_dict.keys()
+        
         return
     
     def set_environ(self):
@@ -87,31 +125,13 @@ class GVisionAPI():
         if content is None:
             raise Exception('The image supplied has not the correct type or cannot be converted in bytestream.\nAccepted types:\n* numpy.ndarray\n* bytes')
         
-        # Performs label detection on the byte stream image
+        # Supply the byte stream image
         image = vision.types.Image(content=content)
 
-        if request_type == 'face detection':
-            self.response = self.client.face_detection(image=image)
-            self.request_category = 'face'
-        if request_type == 'landmark detection':
-            self.response = self.client.landmark_detection(image=image)
-            self.request_category = 'face'
-        if request_type == 'logo detection':
-            self.response = self.client.logo_detection(image=image)
-            self.request_category = 'face'
-        if request_type == 'object detection':
-            self.response = self.client.object_localization(image=image)
-            self.request_category = 'face'
-        if request_type == 'label detection':
-            self.response = self.client.label_detection(image=image)
-            self.request_category = 'face'
-        if request_type == 'image properties':
-            self.response = self.client.image_properties(image=image)
-            self.request_category = 'face'
-        if request_type == 'text detection':
-            self.response = self.client.text_detection(image=image)
-            self.request_category = 'face'
-        
+        # perform actual request based on input
+        self.response = self.requests_dict[request_type](image=image)
+        self.request_category = 'face'
+
         if self.response.error.message:
             raise Exception('{}\nFor more info on error messages, check: ''https://cloud.google.com/apis/design/errors'.format(self.response.error.message))
                 
@@ -564,38 +584,8 @@ class GVisionAPI():
 
         # retrieve the information based on the different options
         types,vertex = [],[]
-        if option =='face landmarks':
-            types, vertex = self.face_landmarks()
-        elif option =='face':
-            types,vertex = self.face()
-        elif option =='head':
-            types,vertex = self.head()
-        elif option =='angles':
-            types,vertex = self.angles()
-        elif option =='objects':
-            types,vertex = self.objects()
-        elif option =='landmarks':
-            types,vertex = self.landmarks()
-        elif option =='logo':
-            types,vertex = self.logos()
-        elif option =='labels':
-            types,vertex = self.labels()
-        elif option =='colors':
-            types,vertex = self.colors()
-        elif option =='crop hints':
-            types,vertex = self.crop_hints()
-        elif option =='text':
-            types,vertex = self.texts()
-        elif option =='pages':
-            types,vertex = self.pages()
-        elif option =='blocks':
-            types,vertex = self.blocks()
-        elif option =='paragraphs':
-            types,vertex = self.paragraphs()
-        elif option =='words':
-            types,vertex = self.words()
-        elif option =='symbols':
-            types,vertex = self.symbols()
+        if option in self.df_types:
+            types, vertex = self.methods_dict[option]()
         else:
             raise Exception('The option you specified is not valid.\nYou should specify one of the following: \n* '+'\n* '.join(self.df_types))
 
