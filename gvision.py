@@ -29,13 +29,14 @@ class GVisionAPI():
         
         # define a dictionary with all possible resquests
         self.requests_dict = {
-            'face detection' :    self.client.face_detection,
-            'landmark detection': self.client.landmark_detection,
-            'logo detection':     self.client.logo_detection,
-            'object detection':   self.client.object_localization,
-            'label detection':    self.client.label_detection,
-            'image properties':   self.client.image_properties,
-            'text detection':     self.client.text_detection
+            'face detection' :       self.client.face_detection,
+            'landmark detection':    self.client.landmark_detection,
+            'logo detection':        self.client.logo_detection,
+            'object detection':      self.client.object_localization,
+            'label detection':       self.client.label_detection,
+            'image properties':      self.client.image_properties,
+            'text detection':        self.client.text_detection,
+            'handwriting detection': self.client.document_text_detection
         }
 
         # define a dictionary with the methods available
@@ -50,7 +51,7 @@ class GVisionAPI():
             'labels':self.labels,
             'colors':self.colors,
             'crop hints':self.crop_hints,
-            'text':self.texts,
+            'texts':self.texts,
             'pages':self.pages,
             'blocks':self.blocks,
             'paragraphs':self.paragraphs,
