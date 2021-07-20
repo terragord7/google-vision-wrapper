@@ -36,7 +36,8 @@ class GVisionAPI():
             'label detection':       self.client.label_detection,
             'image properties':      self.client.image_properties,
             'text detection':        self.client.text_detection,
-            'handwriting detection': self.client.document_text_detection
+            'handwriting detection': self.client.document_text_detection,
+            'web detection':         self.client.web_detection  
         }
 
         # define a dictionary with the methods available
@@ -56,7 +57,9 @@ class GVisionAPI():
             'blocks':self.blocks,
             'paragraphs':self.paragraphs,
             'words':self.words,
-            'symbols':self.symbols
+            'symbols':self.symbols,
+            'web entities':self.web_entities,
+            'matching images':self.matching_images,
         }
         
         # the options are the keys of the dictionaries
@@ -537,8 +540,57 @@ class GVisionAPI():
             vtx.append(vx)
 
         return types,vtx
+    
+    def web_entities(self):
+        '''
+        Loops on the detected web entities. For each,
+        appends a list with description and score.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+        types,vtx = ["DESCRIPTION","SCORE"],[]
 
+        entities = self.response.web_detection.web_entities
+        for i,entity in enumerate(entities):
+            vx = []
+            vx.append(entity.description)
+            vx.append(entity.score)
+            vtx.append(vx)
 
+        return types,vtx
+
+    def matching_images(self):
+        '''
+        Loops on the detected pages with matching images. 
+        For each, appends a list with the page title and url,
+        plus the fully or partially matched images found (url).
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+        types,vtx = ["URL","PAGE_TITLE","TYPE","MATCHING_IMAGE"],[]
+
+        pages = self.response.web_detection.pages_with_matching_images
+        
+        for i,page in enumerate(pages):
+            for v,img in enumerate(page.partial_matching_images):
+                vx = []
+                vx.append(page.url)
+                vx.append(page.page_title)
+                vx.append("partial matching")
+                vx.append(img.url)
+                vtx.append(vx)
+
+            for v,img in enumerate(page.full_matching_images):
+                vx = []
+                vx.append(page.url)
+                vx.append(page.page_title)
+                vx.append("full matching")
+                vx.append(img.url)
+                vtx.append(vx)
+
+        return types,vtx
+
+    
     def df_options(self):
         print('Possible DataFrame Options: \n* '+'\n* '.join(self.df_types))
         return
