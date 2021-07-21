@@ -92,7 +92,7 @@ Given and imput image in either numpy array or bytes format checks type and perf
 
 #### _Parameters_:
 **img** : input imange of type numpy.ndarray or bytes
-**request_type** : a string representing the type of request to perform. Possible values: ['face detection','landmark detection','logo detection','object detection','label detection','image properties','text detection','handwriting detection','web detection']
+**request_type** : a string representing the type of request to perform. Possible values: ```['face detection','landmark detection','logo detection','object detection','label detection','image properties','text detection','handwriting detection','web detection']```.
 
 #### _Usage_:
 ```python
@@ -281,7 +281,15 @@ print(gvision.response)
         Appends also a list with the corresponding headers.
         Returns the two lists created.
         '''
-       
+        
+    def similar_images(self):
+        '''
+        Loops on the suggested similar images. For each,
+        appends a list with the url of that image.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+        
 ```
 #### _Description_:
 Response data in form of list. For more detailed information regarding the headers meaning or type of information please refer to the corresponding guides:
@@ -373,7 +381,7 @@ Dump the information specific to the  ```option``` parameter into a pandas DataF
 **N.B.**: Each option retrieves information via the output lists of the functions defined in Section 3. The same rule regarding the type of request and the information available is applicable to this method. 
 
 #### _Parameters_:
-**option** : a string representing the type of information to retrieve. Possible values: ['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors', 'crop hints','texts','pages','blocks','paragraphs','words','symbols','web entitites','matching images','similar images']. All the possible options can printed with the method ```df_options()``` and retrieved as a list from the ```df_types``` attribute.
+**option** : a string representing the type of information to retrieve. Possible values: ```['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors', 'crop hints','texts','pages','blocks','paragraphs','words','symbols','web entitites','matching images','similar images']```. All the possible options can printed with the method ```df_options()``` and retrieved as a list from the ```df_types``` attribute.
 
 **name** : a value representing the name or the id of the processed image that will be appended to each row of the returned DataFrame.
 
