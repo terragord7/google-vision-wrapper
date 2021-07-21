@@ -264,6 +264,24 @@ print(gvision.response)
         Appends also a list with the corresponding headers.
         Returns the two lists created.
         '''
+        
+    def web_entities(self):
+        '''
+        Loops on the detected web entities. For each,
+        appends a list with description and score.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+    
+    def matching_images(self):
+        '''
+        Loops on the detected pages with matching images. 
+        For each, appends a list with the page title and url,
+        plus the fully or partially matched images found (url).
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+       
 ```
 #### _Description_:
 Response data in form of list. For more detailed information regarding the headers meaning or type of information please refer to the corresponding guides:
@@ -274,6 +292,7 @@ Response data in form of list. For more detailed information regarding the heade
 - [label detection](https://cloud.google.com/vision/docs/labels)
 - [image properties](https://cloud.google.com/vision/docs/detecting-properties)
 - [text in images detection](https://cloud.google.com/vision/docs/ocr)
+- [web entities](https://cloud.google.com/vision/docs/detecting-web)
 
 **N.B.**: to each request type correspond different information that can be retrieved. I.e. ```gvision.perform_request('face detection')``` must me used to retrieve ```face_landmarks, face, head, angles``` information. If another type of request has been performed the API will throw a "key" error. Refere to the section _Usage_ below for a full explanation.
 
@@ -305,6 +324,9 @@ gvision.perform_request('logo detection')
 headers, data = gvision.logos()
 
 gvision.perform_request('text detection')
+# work also with:
+#gvision.perform_request('handwriting detection')
+
 headers,    data    = gvision.texts()
 p_headers,  p_data  = gvision.pages()
 b_headers,  b_data  = gvision.blocks()
@@ -312,10 +334,14 @@ pr_headers, pr_data = gvision.paragraphs()
 w_headers,  w_data  = gvision.words()
 s_headers,  s_data  = gvision.symbols()
 
-
 gvision.perform_request('image properties')
 headers,    data    = gvision.colors()
 ch_headers, ch_data = gvision.crop_hints()
+
+gvision.perform_request('web detection')
+headers,   data   = gvision.web_entities()
+m_headers, m_data = gvision.matching_images()
+s_headers, s_data = gvision.similar_images()
 
 ```
 
