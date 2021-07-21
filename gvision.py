@@ -2,7 +2,8 @@
 """
 Created on Thu Jun 24 10:31:07 2021
 
-@author: giuli
+@github: gcgrossi
+@email: giulio.cornelio.grossi@gmail.com
 """
 
 import os
@@ -60,6 +61,7 @@ class GVisionAPI():
             'symbols':self.symbols,
             'web entities':self.web_entities,
             'matching images':self.matching_images,
+            'similar images':self.similar_images
         }
         
         # the options are the keys of the dictionaries
@@ -587,6 +589,23 @@ class GVisionAPI():
                 vx.append("full matching")
                 vx.append(img.url)
                 vtx.append(vx)
+
+        return types,vtx
+    
+    def similar_images(self):
+        '''
+        Loops on the suggested similar images. For each,
+        appends a list with the url of that image.
+        Appends also a list with the corresponding headers.
+        Returns the two lists created.
+        '''
+        types,vtx = ["URL"],[]
+
+        images = self.response.web_detection.visually_similar_images
+        for image in images:
+            vx = []
+            vx.append(image.url)
+            vtx.append(vx)
 
         return types,vtx
 
