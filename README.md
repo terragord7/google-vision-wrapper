@@ -83,7 +83,7 @@ def perform_request(self,img=None,request_type=None):
     - img : input imange of type numpy.ndarray or bytes
     - request_type : a string in ['face detection','landmark detection','logo detection',
                                   'object detection','label detection','image properties',
-                                  'text detection']
+                                  'text detection','handwriting detection','web detection']
       representing the type of request to perform
     '''
 ```
@@ -92,7 +92,7 @@ Given and imput image in either numpy array or bytes format checks type and perf
 
 #### _Parameters_:
 **img** : input imange of type numpy.ndarray or bytes
-**request_type** : a string representing the type of request to perform. Possible values: ['face detection','landmark detection','logo detection','object detection','label detection','image properties','text detection']
+**request_type** : a string representing the type of request to perform. Possible values: ['face detection','landmark detection','logo detection','object detection','label detection','image properties','text detection','handwriting detection','web detection']
 
 #### _Usage_:
 ```python
@@ -356,7 +356,9 @@ def to_df(self,option=None,name='image'):
     - option: a string in ['face landmarks','face','head','angles',
                           'objects','landmarks','logos','labels',
                           'colors', 'crop hints','texts','pages',
-                          'blocks','paragraphs','words','symbols']
+                          'blocks','paragraphs','words','symbols',
+                          'web entitites','matching images',
+                          'similar images']
       precifing the type of information to dump in the DataFrame
     - name: (optional) the name of the image used in the request. 
       default is 'image'.
@@ -371,7 +373,7 @@ Dump the information specific to the  ```option``` parameter into a pandas DataF
 **N.B.**: Each option retrieves information via the output lists of the functions defined in Section 3. The same rule regarding the type of request and the information available is applicable to this method. 
 
 #### _Parameters_:
-**option** : a string representing the type of information to retrieve. Possible values: ['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors', 'crop hints','texts','pages','blocks','paragraphs','words','symbols']. All the possible options can printed with the method ```df_options()``` and retrieved as a list from the ```df_types``` attribute.
+**option** : a string representing the type of information to retrieve. Possible values: ['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors', 'crop hints','texts','pages','blocks','paragraphs','words','symbols','web entitites','matching images','similar images']. All the possible options can printed with the method ```df_options()``` and retrieved as a list from the ```df_types``` attribute.
 
 **name** : a value representing the name or the id of the processed image that will be appended to each row of the returned DataFrame.
 
