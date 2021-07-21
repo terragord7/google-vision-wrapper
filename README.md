@@ -56,7 +56,7 @@ class GVisionAPI():
 Main Class Constructor. set credentials as environmental variable and instantiate a Google ImageAnnotator Client. See [1](https://cloud.google.com/vision/docs/before-you-begin) and [2](https://cloud.google.com/vision/docs/detecting-faces) for more info.
 
 #### _Parameters_:
-**keyfile**: path to the .json auth file returned by google vision API. Refer to [here](https://cloud.google.com/vision/docs/before-you-begin) to know how to get it
+- **keyfile**: path to the .json auth file returned by google vision API. Refer to [here](https://cloud.google.com/vision/docs/before-you-begin) to know how to get it
 
 #### _Usage_:
 ```python
@@ -91,8 +91,8 @@ def perform_request(self,img=None,request_type=None):
 Given and imput image in either numpy array or bytes format checks type and perform conversion nparray->bytes (if needed). Provides the bytes content to the Google client and performs an API request based on the "request_type" parameter. Response can be accessed using the ```self.response``` attribute. All the possible options can printed with the method ```request_options()``` and retrieved as a list from the ```request_types``` attribute.
 
 #### _Parameters_:
-**img** : input imange of type numpy.ndarray or bytes
-**request_type** : a string representing the type of request to perform. Possible values: ```['face detection','landmark detection','logo detection','object detection','label detection','image properties','text detection','handwriting detection','web detection']```.
+- **img** : input imange of type numpy.ndarray or bytes
+- **request_type** : a string representing the type of request to perform. Possible values: ```['face detection','landmark detection','logo detection','object detection','label detection','image properties','text detection','handwriting detection','web detection']```.
 
 #### _Usage_:
 ```python
@@ -305,7 +305,8 @@ Response data in form of list. For more detailed information regarding the heade
 **N.B.**: to each request type correspond different information that can be retrieved. I.e. ```gvision.perform_request('face detection')``` must me used to retrieve ```face_landmarks, face, head, angles``` information. If another type of request has been performed the API will throw a "key" error. Refere to the section _Usage_ below for a full explanation.
 
 #### _Return types_:
-**headers** : list. **data** : list
+- **headers** : list. 
+- **data** : list
 
 #### _Usage_:
 ```python
@@ -381,9 +382,8 @@ Dump the information specific to the  ```option``` parameter into a pandas DataF
 **N.B.**: Each option retrieves information via the output lists of the functions defined in Section 3. The same rule regarding the type of request and the information available is applicable to this method. 
 
 #### _Parameters_:
-**option** : a string representing the type of information to retrieve. Possible values: ```['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors', 'crop hints','texts','pages','blocks','paragraphs','words','symbols','web entitites','matching images','similar images']```. All the possible options can printed with the method ```df_options()``` and retrieved as a list from the ```df_types``` attribute.
-
-**name** : a value representing the name or the id of the processed image that will be appended to each row of the returned DataFrame.
+- **option** : a string representing the type of information to retrieve. Possible values: ```['face landmarks','face','head','angles','objects','landmarks','logos','labels','colors', 'crop hints','texts','pages','blocks','paragraphs','words','symbols','web entitites','matching images','similar images']```. All the possible options can printed with the method ```df_options()``` and retrieved as a list from the ```df_types``` attribute.
+- **name** : a value representing the name or the id of the processed image that will be appended to each row of the returned DataFrame.
 
 #### _Usage_:
 ```python
