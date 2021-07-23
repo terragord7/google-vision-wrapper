@@ -1,7 +1,7 @@
 ***
 
-<img src="assets/label_detection_cover.png" width="100%">
-    
+<img src="../assets/label_detection_cover.png" width="100%">
+
 ***
 
 # Label Detection with Python, Google Vision API and google-vision-wrapper
@@ -39,7 +39,7 @@ The Google Vision API accepts images in bytes format. If you chose to go on with
 img = cv2.imread(os.path.join(os.getcwd(),'images','barad-dur.png'))
 ```
 
-we are going to use this image: 
+we are going to use this image:
 
 
 ```python
@@ -83,7 +83,7 @@ print('\nPossible Options:')
 print(gvision.request_types)
 ```
 
-    Possible Request Options: 
+    Possible Request Options:
     * face detection
     * landmark detection
     * logo detection
@@ -93,10 +93,10 @@ print(gvision.request_types)
     * text detection
     * handwriting detection
     * web detection
-    
+
     Possible Options:
     dict_keys(['face detection', 'landmark detection', 'logo detection', 'object detection', 'label detection', 'image properties', 'text detection', 'handwriting detection', 'web detection'])
-    
+
 
 We are ready to perform the actual request. The body of the response from the API can be accessed using the  ```.response``` attribute.
 
@@ -169,10 +169,10 @@ print(gvision.response)
       score: 0.73579526
       topicality: 0.73579526
     }
-    
-    
 
-And it is quite verbose. 
+
+
+And it is quite verbose.
 
 ### Obtaining the information as list
 The information regarding object detection can be accessed using different methods. In the following, we are going to obtain all the label annotations.
@@ -187,7 +187,7 @@ print(labels)
 
     ['DESCRIPTION', 'SCORE', 'TOPICALITY']
     [['Cloud', 0.9694961309432983, 0.9694961309432983], ['Atmosphere', 0.9481807947158813, 0.9481807947158813], ['Sky', 0.9279359579086304, 0.9279359579086304], ['World', 0.8751534223556519, 0.8751534223556519], ['Tower', 0.8382294774055481, 0.8382294774055481], ['Atmospheric phenomenon', 0.821094274520874, 0.821094274520874], ['Lighthouse', 0.8116122484207153, 0.8116122484207153], ['Geological phenomenon', 0.7721946239471436, 0.7721946239471436], ['Pollution', 0.7613505721092224, 0.7613505721092224], ['Landscape', 0.735795259475708, 0.735795259475708]]
-    
+
 
 Remember: for each label detected (there could be more than 1) a list with the corresponding information is filled. I.e. the first label is ```labels[0]```. As you can see, each list contains the object name, the detection confidence and the topicality.
 
@@ -208,7 +208,7 @@ print('\nPossible Options:')
 print(gvision.df_types)
 ```
 
-    Possible DataFrame Options: 
+    Possible DataFrame Options:
     * face landmarks
     * face
     * head
@@ -228,10 +228,10 @@ print(gvision.df_types)
     * web entities
     * matching images
     * similar images
-    
+
     Possible Options:
     dict_keys(['face landmarks', 'face', 'head', 'angles', 'objects', 'landmarks', 'logo', 'labels', 'colors', 'crop hints', 'texts', 'pages', 'blocks', 'paragraphs', 'words', 'symbols', 'web entities', 'matching images', 'similar images'])
-    
+
 
 Let's obtain the information.
 
@@ -344,17 +344,17 @@ labelled = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2RGB)
 # the labels
 h,w = 0,labelled.shape[1]
 for l in labels:
-    
+
     # increase y coordinate
     h+=100
-    
+
     # get label and confidence
     label = l[0]
     score = l[1]*100
-    
+
     # draw label and confidence
     cv2.putText(labelled, "{} {:.1f}%".format(label,score), (int(w/2)-100, int(h)), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 255, 0), 3)
-    
+
 #show the image
 plt.imshow(labelled)
 
@@ -367,7 +367,7 @@ cv2.imwrite(os.path.join(os.getcwd(),'assets','output_baraddur.jpg'), output)
 ![png](output_label_detection_1.png)
 
 
-Apart from some slightly off outcomes, it seems the labels detected are pretty much in line with Boromir's description! 
+Apart from some slightly off outcomes, it seems the labels detected are pretty much in line with Boromir's description!
 
 Even Google Vision API knows that:
 >_**One does not simply walk into Mordor**_
