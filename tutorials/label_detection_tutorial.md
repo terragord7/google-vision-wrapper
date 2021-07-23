@@ -372,6 +372,3 @@ Apart from some slightly off outcomes, it seems the labels detected are pretty m
 Even Google Vision API knows that:
 >_**One does not simply walk into Mordor**_
 
-
-
-<image src="assets/face_detection_cover.png" width="50%">
