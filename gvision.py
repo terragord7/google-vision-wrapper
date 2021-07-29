@@ -132,7 +132,7 @@ class GVisionAPI():
             raise Exception('The image supplied has not the correct type or cannot be converted in bytestream.\nAccepted types:\n* numpy.ndarray\n* bytes')
         
         # Supply the byte stream image
-        image = vision.types.Image(content=content)
+        image = vision.Image(content=content)
 
         # perform actual request based on input
         self.response = self.requests_dict[request_type](image=image)
