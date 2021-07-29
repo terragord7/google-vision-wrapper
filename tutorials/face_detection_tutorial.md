@@ -2,6 +2,8 @@
 
 # Face Detection with Python, Google Vision API and google-vision-wrapper  
 
+[![Made withJupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?style=for-the-badge&logo=Jupyter)](https://github.com/gcgrossi/google-vision-wrapper/blob/main/face_detection_tutorial.ipynb)
+
 ### Introduction
 In this quick tutorial we are going to show how to use google-vision-wrapper to perform face detection on images. Please refer to the [Official Github Page](https://github.com/gcgrossi/google-vision-wrapper) for more information.
 
