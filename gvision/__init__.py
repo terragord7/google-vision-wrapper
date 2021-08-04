@@ -6,4 +6,3 @@ __version__ = "0.0.1"
 
 # import the necessary packages
 from .gvision import GVisionAPI
-from .gvision import google_version

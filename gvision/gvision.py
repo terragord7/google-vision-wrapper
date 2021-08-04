@@ -13,16 +13,6 @@ from google.cloud import vision
 import cv2
 
 
-def google_version(lib=None):
-
-    # if the supplied library is None, import OpenCV
-    if lib is None:
-        import google.cloud as lib
-
-    # return the major version number
-    return int(lib.__version__.split(".")[0])
-
-
 class GVisionAPI():
     def __init__(self, keyfile=None):
         
