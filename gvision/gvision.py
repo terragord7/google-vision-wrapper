@@ -13,6 +13,16 @@ from google.cloud import vision
 import cv2
 
 
+def google_version(lib=None):
+
+    # if the supplied library is None, import OpenCV
+    if lib is None:
+        import google.cloud as lib
+
+    # return the major version number
+    return int(lib.__version__.split(".")[0])
+
+
 class GVisionAPI():
     def __init__(self, keyfile=None):
         
@@ -49,7 +59,7 @@ class GVisionAPI():
             'angles': self.angles,
             'objects': self.objects,
             'landmarks':self.landmarks,
-            'logo': self.logos,
+            'logos': self.logos,
             'labels':self.labels,
             'colors':self.colors,
             'crop hints':self.crop_hints,
@@ -71,13 +81,13 @@ class GVisionAPI():
         return
     
     def set_environ(self):
-        '''
+        """
         set credentials as environmental variable and 
         instantiate a Google ImageAnnotator Client
         see https://cloud.google.com/vision/docs/before-you-begin
         and https://cloud.google.com/vision/docs/detecting-faces 
         for more info
-        '''
+        """
         
         # set credentials
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=self.keyfile
@@ -91,7 +101,7 @@ class GVisionAPI():
         return
     
     def perform_request(self,img=None,request_type=None):
-        '''
+        """
         given and imput image in either numpy array or bytes format
         chek type and perform conversion nparray->bytes (if needed).
         Provides the bytes content to the Google client and perform
@@ -102,7 +112,7 @@ class GVisionAPI():
         - img : input imange of type numpy.ndarray or bytes
         - request_type : a string in ['face detection','landmark detection','logo detection']
           representing the type of request to perform
-        '''
+        """
 
         # init bytestream image content
         content = None
@@ -144,30 +154,30 @@ class GVisionAPI():
         return
                     
     def face_landmarks(self):
-        '''
+        """
         Loop on the face annotations and, for each face,
         append a 2-tuple list with (x,y) coordinates of detected points.
         append also a list with the corresponding point names.
         return the two lists created
-        '''
+        """
         self.faces = self.response.face_annotations
         types,vtx = [],[]
         for i,face in enumerate(self.faces):
             vx = []
             for vertex in face.landmarks:
                 vx.append((vertex.position.x,vertex.position.y))
-                if i==0: types.append("{}".format(vertex.type))
+                if i==0: types.append("{}".format(vertex.type_))
             vtx.append(vx)
                 
         return types,vtx
 
     def head(self):
-        '''
+        """
         Loop on the face annotations and, for each face,
         append a 2-tuple list with (x,y) coordinates of head bounding box.
         append also a list with the corresponding point names.
         return the two lists created
-        '''
+        """
         self.faces = self.response.face_annotations
         types,vtx = [],[]
         for i,face in enumerate(self.faces):
@@ -180,12 +190,12 @@ class GVisionAPI():
         return types,vtx
     
     def face(self):
-        '''
+        """
         Loop on the face annotations and, for each face,
         append a 2-tuple list with (x,y) coordinates of face bounding box.
         append also a list with the corresponding point names.
         return the two lists created
-        '''
+        """
         self.faces = self.response.face_annotations
         types, vtx= [],[]
         for i,face in enumerate(self.faces):
@@ -198,12 +208,12 @@ class GVisionAPI():
         return types,vtx
     
     def angles(self):
-        '''
+        """
         Loops on the face annotations and, for each face,
         appends a list with the rotation angles on the 3 axis.
         appends also a list with the corresponding angle names.
         return the two lists created
-        '''
+        """
         self.faces = self.response.face_annotations
         angles, types = [], ['roll_angle','tilt_angle','pan_angle']
         for face in self.faces:
@@ -212,13 +222,13 @@ class GVisionAPI():
         return types,angles
     
     def objects(self):
-        '''
+        """
         Loops on the detected objects. For each,
         appends a list with name, confidence and
         (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["OBJECT_NAME","CONFIDENCE"],[]
         h,w,d = self.img.shape
 
@@ -236,7 +246,7 @@ class GVisionAPI():
         return types,vtx
 
     def colors(self):
-        '''
+        """
         Loops on the detected colors. For each,
         appends a list with: 
         - (r,g,b) 3-tuple with values of the color channels.
@@ -244,7 +254,7 @@ class GVisionAPI():
         - score
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["COLOR","PIXEL_FRACTION","SCORE"],[]
 
         colors = self.response.image_properties_annotation.dominant_colors
@@ -260,7 +270,7 @@ class GVisionAPI():
         return types,vtx
     
     def crop_hints(self):
-        '''
+        """
         Loops on the crop_hints. For each,
         appends a list with: 
         - (x,y) 2-tuple with coordinates of the cropped image.
@@ -268,7 +278,7 @@ class GVisionAPI():
         - importance fraction.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = [],[]
 
         hints = self.response.crop_hints_annotation.crop_hints
@@ -289,13 +299,13 @@ class GVisionAPI():
         return types,vtx
     
     def logos(self):
-        '''
+        """
         Loops on the detected logos. For each,
         appends a list with name, confidence and
         (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["LOGO_NAME","CONFIDENCE"],[]
 
         logos = self.response.logo_annotations
@@ -312,13 +322,13 @@ class GVisionAPI():
         return types,vtx
     
     def texts(self):
-        '''
+        """
         Loops on the detected texts. For each,
         appends a list with description, language and
         (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["DESCRIPTION","LANGUAGE"],[]
 
         texts = self.response.text_annotations
@@ -335,23 +345,26 @@ class GVisionAPI():
         return types,vtx
     
     def pages(self):
-        '''
+        """
         Loops on the detected pages. For each,
         appends a list with language, confidence, 
         height and width.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["LANGUAGE","CONFIDENCE","HEIGHT","WIDTH"],[]
 
         pages = self.response.full_text_annotation.pages
         for page in pages:
-            vx = []
+            
+            vx,lang,conf = [],[],[]
 
             for p in page.property.detected_languages:
-                vx.append(p.language_code)
-                vx.append(p.confidence)
+                lang.append(p.language_code)
+                conf.append(p.confidence)
             
+            vx.append(lang)
+            vx.append(conf)
             vx.append(page.height)
             vx.append(page.width)
 
@@ -360,26 +373,30 @@ class GVisionAPI():
         return types,vtx
     
     def blocks(self):
-        '''
+        """
         Loops on the blocks in the detected pages. For each,
         appends a list with description, language, confidence, block type 
         and (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["BLOCK_TYPE","LANGUAGE","CONFIDENCE"],[]
 
         pages = self.response.full_text_annotation.pages
         for p,page in enumerate(pages):
             for b,block in enumerate(page.blocks):
-                vx = []
+                
+                vx,lang,conf = [],[],[]
                 
                 vx.append(block.block_type)
 
                 properties = block.property.detected_languages
                 for prop in properties:
-                   vx.append(prop.language_code)
-                   vx.append(prop.confidence)
+                   lang.append(prop.language_code)
+                   conf.append(prop.confidence)
+
+                vx.append(lang)
+                vx.append(conf)
                 
                 vertices = block.bounding_box.vertices
                 for v,vertex in enumerate(vertices):
@@ -391,25 +408,29 @@ class GVisionAPI():
         return types,vtx
     
     def paragraphs(self):
-        '''
+        """
         Loops on the paragraphs in the blocks in the detected pages. For each,
         appends a list with description, language, confidence
         and (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["LANGUAGE","CONFIDENCE"],[]
 
         pages = self.response.full_text_annotation.pages
         for p,page in enumerate(pages):
             for b,block in enumerate(page.blocks):
                 for par,paragraph in enumerate(block.paragraphs):
-                    vx = []
+                    
+                    vx,lang,conf = [],[],[]
  
                     properties = paragraph.property.detected_languages
                     for prop in properties:
-                        vx.append(prop.language_code)
-                        vx.append(prop.confidence)
+                        lang.append(prop.language_code)
+                        conf.append(prop.confidence)
+                    
+                    vx.append(lang)
+                    vx.append(conf)
                 
                     vertices = paragraph.bounding_box.vertices
                     for v,vertex in enumerate(vertices):
@@ -421,14 +442,14 @@ class GVisionAPI():
         return types,vtx
 
     def words(self):
-        '''
+        """
         Loops on the words in the paragraphs 
         in the blocks in the detected pages. For each,
         appends a list with language
         and (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["LANGUAGE"],[]
 
         pages = self.response.full_text_annotation.pages
@@ -437,13 +458,14 @@ class GVisionAPI():
                 for par,paragraph in enumerate(block.paragraphs):
                     for w,word in enumerate(paragraph.words):
 
-                        vx = []
+                        vx,lang = [],[]
  
                         properties = word.property.detected_languages
                         for prop in properties:
-                            vx.append(prop.language_code)
+                            lang.append(prop.language_code)
+                        
+                        vx.append(lang)
 
-                
                         vertices = word.bounding_box.vertices
                         for v,vertex in enumerate(vertices):
                             vx.append((vertex.x,vertex.y))
@@ -455,14 +477,14 @@ class GVisionAPI():
 
     
     def symbols(self):
-        '''
+        """
         Loops on the symbols in the words, in the paragraphs,
         in the blocks, in the detected pages. For each,
         appends a list with text, language
         and (x,y) 2-tuples with the bounding box coordinates.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["TEXT","LANGUAGE"],[]
 
         pages = self.response.full_text_annotation.pages
@@ -471,15 +493,17 @@ class GVisionAPI():
                 for par,paragraph in enumerate(block.paragraphs):
                     for w,word in enumerate(paragraph.words):
                         for s,symbol in enumerate(word.symbols):
-                            vx = []
+                            
+                            vx,lang = [],[]
 
                             vx.append(symbol.text)
  
                             properties = symbol.property.detected_languages
                             for prop in properties:
-                                vx.append(prop.language_code)
+                                lang.append(prop.language_code)
 
-                
+                            vx.append(lang)
+                            
                             vertices = symbol.bounding_box.vertices
                             for v,vertex in enumerate(vertices):
                                 vx.append((vertex.x,vertex.y))
@@ -492,7 +516,7 @@ class GVisionAPI():
 
 
     def landmarks(self):
-        '''
+        """
         Loops on the detected landmarks. For each,
         appends a list with: 
         - name
@@ -501,7 +525,7 @@ class GVisionAPI():
         - 2-tuple with latitude and logitude.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["DESCRIPTION","CONFIDENCE"],[]
 
         lands = self.response.landmark_annotations
@@ -523,13 +547,13 @@ class GVisionAPI():
         return types,vtx
 
     def labels(self):
-        '''
+        """
         Loops on the detected lables. For each,
         appends a list with name, 
         confidence and topicality.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["DESCRIPTION","SCORE","TOPICALITY"],[]
 
         labels = self.response.label_annotations
@@ -544,12 +568,12 @@ class GVisionAPI():
         return types,vtx
     
     def web_entities(self):
-        '''
+        """
         Loops on the detected web entities. For each,
         appends a list with description and score.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["DESCRIPTION","SCORE"],[]
 
         entities = self.response.web_detection.web_entities
@@ -562,13 +586,13 @@ class GVisionAPI():
         return types,vtx
 
     def matching_images(self):
-        '''
+        """
         Loops on the detected pages with matching images. 
         For each, appends a list with the page title and url,
         plus the fully or partially matched images found (url).
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["URL","PAGE_TITLE","TYPE","MATCHING_IMAGE"],[]
 
         pages = self.response.web_detection.pages_with_matching_images
@@ -593,12 +617,12 @@ class GVisionAPI():
         return types,vtx
     
     def similar_images(self):
-        '''
+        """
         Loops on the suggested similar images. For each,
         appends a list with the url of that image.
         Appends also a list with the corresponding headers.
         Returns the two lists created.
-        '''
+        """
         types,vtx = ["URL"],[]
 
         images = self.response.web_detection.visually_similar_images
@@ -615,10 +639,10 @@ class GVisionAPI():
         return
     
     def prepare_face_df(self,types,vertex,name):
-        '''
+        """
         Prepares DataFrame 
         specific for the case 'face' detection.
-        '''
+        """
         # First: prepare the column names
         # IMAGE_NAME is the first column
         # followed by all the point's name provided
@@ -638,7 +662,7 @@ class GVisionAPI():
         return pd.DataFrame(rows, columns=columns)
     
     def to_df(self,option=None,name='image'):
-        '''
+        """
         Parameters:
         - option: a string in ['face landmarks','face','head','angles',
                                'objects','landmarks','logos','labels',
@@ -650,7 +674,7 @@ class GVisionAPI():
 
         Returns:
         a DataFrame with information for the specific option.
-        '''
+        """
 
         if option is None: raise Exception('Required Parameter "option".\nYou should specify one of the following: \n* '+'\n* '.join(self.df_types))
 
