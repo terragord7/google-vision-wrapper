@@ -31,6 +31,20 @@ Even if the guide is exhaustive and the API is straightforward to use, I found t
 
 I started for a small project of aesthetics medicine I'm working on and I though that maybe someone else could find it useful. I am therefore extending my original tiny class for face landmark recognition, with all the features provided by Google Vision API, with the possibility of retrieving the desired information in 3-lines code, in array format or as a Pandas DataFrame.
 
+### _Installation_
+- From Pypi:
+
+```
+pip install google-vision-wrapper
+```
+
+- Cloning the Github repository:
+
+```
+git clone https://github.com/gcgrossi/google-vision-wrapper
+```
+
+
 ### _Before you start: Setup your GCP_
 Before starting, it is mandatory to correctly setup a Google Cloud Project, authorise the Google Vision API and generate a .json API key file. Be sure to have fulfilled all the steps in the [Before you Begin Guide](https://cloud.google.com/vision/docs/before-you-begin) before moving on.
 
